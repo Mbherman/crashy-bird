@@ -13,22 +13,21 @@ bird = game.createSprite(0, 2)
 bird.set(LedSpriteProperty.Blink, 300)
 basic.forever(function () {
     while (obstacles.length > 0 && obstacles[0].get(LedSpriteProperty.X) == 0) {
-        let obstacle: game.LedSprite[] = []
-        obstacle.removeAt(0).delete()
+        obstacles.removeAt(0).delete()
     }
-    for (let obstacle2 of obstacles) {
-        obstacle2.change(LedSpriteProperty.X, -1)
+    for (let obstacle of obstacles) {
+        obstacle.change(LedSpriteProperty.X, -1)
     }
     if (ticks % 3 == 0) {
         emptyObstacleY = randint(0, 4)
-        for (let index2 = 0; index2 <= 4; index2++) {
-            if (index2 != emptyObstacleY) {
-                obstacles.push(game.createSprite(4, index2))
+        for (let index = 0; index <= 4; index++) {
+            if (index != emptyObstacleY) {
+                obstacles.push(game.createSprite(4, index))
             }
         }
     }
-    for (let obstacle3 of obstacles) {
-        if (obstacle3.get(LedSpriteProperty.X) == bird.get(LedSpriteProperty.X) && obstacle3.get(LedSpriteProperty.Y) == bird.get(LedSpriteProperty.Y)) {
+    for (let obstacle of obstacles) {
+        if (obstacle.get(LedSpriteProperty.X) == bird.get(LedSpriteProperty.X) && obstacle.get(LedSpriteProperty.Y) == bird.get(LedSpriteProperty.Y)) {
             game.gameOver()
         }
     }
